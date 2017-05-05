@@ -1,0 +1,22 @@
+html,
+body {
+    height:100%
+}
+
+.welcome-info {
+    text-align: center;
+}
+
+.menu-buttons {
+    text-align: center;
+}
+
+.main-window {
+    max-width: 600px;
+    margin-top: 40px;
+}
+
+.menu-buttons button {
+    margin: 10px;
+}
+
