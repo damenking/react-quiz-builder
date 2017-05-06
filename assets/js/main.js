@@ -5,28 +5,44 @@ import {ViewQuestions} from './view_questions';
 import {Menu} from './menu';
 import {AddQuestion} from './add_question';
 
-var MainWindow = React.createClass({
-    getInitialState: function() {
-        return { currentScreen: 'welcome' }
-    },
+class MainWindow extends React.Component {
+    constructor(props) {
+        super(props);
 
-    viewQuestionsScreen: function() {
-    this.setState({ currentScreen: 'viewQuestions' })
-    }, 
-    viewWelcomeScreen: function() {
+        this.state = {
+            currentScreen: 'welcome',
+        }
+        this.viewQuestionsScreen = this.viewQuestionsScreen.bind(this)
+        this.viewWelcomeScreen = this.viewWelcomeScreen.bind(this)
+        this.addQuestionScreen = this.addQuestionScreen.bind(this)
+        this.setScreenState = this.setScreenState.bind(this)
+        console.log(this.state)
+    }
+
+    setScreenState(screen) {
+        if (screen == 'viewQuestions')
+            this.setState({ currentScreen: 'viewQuestions' })
+        else if (screen == 'welcome')
+            this.setState({ currentScreen: 'welcome' })
+        else if (screen == 'addQuestion')
+            this.setState({ currentScreen: 'addQuestion'})
+    }
+    viewQuestionsScreen() {
+        this.setState({ currentScreen: 'viewQuestions' })
+    }
+    viewWelcomeScreen() {
         this.setState({ currentScreen: 'welcome' })
-    }, 
-    addQuestionScreen: function() {
+    }
+    addQuestionScreen() {
         this.setState({ currentScreen: 'addQuestion'})
-    },
+    }
 
-
-    render: function() {
+    render() {
         if (this.state.currentScreen == 'welcome') {
             return (
              <div className="well main-window container">
                     <Welcome />
-                    <Menu viewWelcomeScreen={this.viewWelcomeScreen} viewQuestionsScreen={this.viewQuestionsScreen} addQuestionScreen={this.addQuestionScreen} />
+                    <Menu setScreenState={this.setScreenState} />
                 </div>   
             )
         }
@@ -47,9 +63,10 @@ var MainWindow = React.createClass({
             )
         }         
     }
-});
+}
 
 export {MainWindow};
+
 
 
 
