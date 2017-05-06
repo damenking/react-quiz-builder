@@ -30,6 +30,7 @@ var AddQuestion = React.createClass({
     //     })
     // },
     
+    // axios npm package for making api post requests
 
     handleSubmit: function(e) {
     //prevent the default behavior of submitting a form??
@@ -52,9 +53,9 @@ var AddQuestion = React.createClass({
         return (
             <form className="add-question" onSubmit={this.handleSubmit}>
                 <h2>Add Question</h2>
-                <input name="question" type="text" value="hi" onChange={this.handleChange} required={true} />
+                <input name="question" type="text" value={this.state.question} onChange={this.handleChange} required={true} />
                 <br />
-                <input name="answer" type="text" value="hello" onChange={this.handleChange} required={true} />
+                <input name="answer" type="text" value={this.state.answer} onChange={this.handleChange} required={true} />
                 <br />
                 <input type="submit" value="submit" />
             </form>
