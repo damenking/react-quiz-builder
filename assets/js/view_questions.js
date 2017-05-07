@@ -11,6 +11,7 @@ class ViewQuestions extends React.Component{
         };
         this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this);
         this.updateQuestion = this.updateQuestion.bind(this)
+        this.deleteQuestion = this.deleteQuestion.bind(this)
  
     }
 
@@ -25,22 +26,29 @@ class ViewQuestions extends React.Component{
         })
     }
 
-    updateQuestion(updatedQuestion) {
-        console.log(updatedQuestion.id)
-        console.log(updatedQuestion.question)
-        console.log(updatedQuestion.answer)
-        // maybe need to chnage the url to specific to the id??
+    deleteQuestion(questionId) {
+        var instanceUrl = this.props.url + questionId + "/"
         axios({
-            method: 'post',
-            url: this.props.url,
+            method: 'delete',
+            url: instanceUrl,
+            xsrfHeaderName: "X-CSRFTOKEN",
+        })
+    }
+
+    updateQuestion(updatedQuestion) {
+        var instanceUrl = this.props.url + updatedQuestion.id + "/"
+        axios({
+            method: 'put',
+            url: instanceUrl,
             data: {
-                id: updatedQuestion.id,
                 question: updatedQuestion.question,
                 correctAnswer: updatedQuestion.correctAnswer
             },
             xsrfHeaderName: "X-CSRFTOKEN",
         });
     }
+
+    
 
     componentDidMount() {
         this.loadQuestionsFromServer();
@@ -52,7 +60,7 @@ class ViewQuestions extends React.Component{
             <div>
                 <h2>Question List</h2>
                 {questionList.map((question) =>
-                    <Question item={question} key={question.id} updateQuestion={this.updateQuestion} />
+                    <Question item={question} key={question.id} updateQuestion={this.updateQuestion} deleteQuestion={this.deleteQuestion}/>
                 )}
             </div>
         );
