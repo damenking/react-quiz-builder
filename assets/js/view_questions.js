@@ -7,39 +7,20 @@ class ViewQuestions extends React.Component{
         
         this.state = {
             data: []
-        },
-        this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this)
-        this.updateState = this.updateState.bind(this)
+        };
+        this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this);
     }
 
     loadQuestionsFromServer(){
         axios({
             method: 'get',
             url: this.props.url,
-        }).then(function(response) {
-            console.log(response)
-            this.updateState;
+        }).then(response => {
+            this.setState({
+                data: response.data
+            })      
         })
     }
-
-    updateState() {
-        this.setState({
-            data: [{
-                question: "how are you?",
-                correctAnswer: "Greate!"
-            }]
-        })
-    }
-    //     loadQuestionsFromServer(){
-    //     $.ajax({
-    //         url: this.props.url,
-    //         datatype: 'json',
-    //         cache: false,
-    //         success: function(data) {
-    //             this.setState({data: data});
-    //         }.bind(this)
-    //     })
-    // }
 
     componentDidMount() {
         this.loadQuestionsFromServer();
