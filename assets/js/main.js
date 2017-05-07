@@ -16,7 +16,6 @@ class MainWindow extends React.Component {
         this.viewWelcomeScreen = this.viewWelcomeScreen.bind(this)
         this.addQuestionScreen = this.addQuestionScreen.bind(this)
         this.setScreenState = this.setScreenState.bind(this)
-        console.log(this.state)
     }
 
     setScreenState(screen) {
@@ -42,7 +41,7 @@ class MainWindow extends React.Component {
             return (
              <div className="well main-window container">
                     <Welcome />
-                    <Menu setScreenState={this.setScreenState} />
+                    <Menu viewWelcomeScreen={this.viewWelcomeScreen} viewQuestionsScreen={this.viewQuestionsScreen} addQuestionScreen={this.addQuestionScreen} />
                 </div>   
             )
         }
