@@ -1,14 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+import Question from './question';
 
 class ViewQuestions extends React.Component{
     constructor(props) {
         super(props);
         
         this.state = {
-            data: []
+            data: [],
         };
         this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this);
+        this.updateQuestion = this.updateQuestion.bind(this)
+ 
     }
 
     loadQuestionsFromServer(){
@@ -22,24 +25,37 @@ class ViewQuestions extends React.Component{
         })
     }
 
+    updateQuestion(updatedQuestion) {
+        console.log(updatedQuestion.id)
+        console.log(updatedQuestion.question)
+        console.log(updatedQuestion.answer)
+        // maybe need to chnage the url to specific to the id??
+        axios({
+            method: 'post',
+            url: this.props.url,
+            data: {
+                id: updatedQuestion.id,
+                question: updatedQuestion.question,
+                correctAnswer: updatedQuestion.correctAnswer
+            },
+            xsrfHeaderName: "X-CSRFTOKEN",
+        });
+    }
+
     componentDidMount() {
         this.loadQuestionsFromServer();
     }
 
     render() {
-        if (this.state.data) {
-            var questionList = this.state.data.map(function(question){
-                return <li key={question.id}>Question: {question.question}<br />Answer: {question.correctAnswer}</li>
-            })
-        }
+        var questionList = this.state.data
         return (
             <div>
-                <h1>Question List</h1>
-                <ul>
-                    {questionList}
-                </ul>
+                <h2>Question List</h2>
+                {questionList.map((question) =>
+                    <Question item={question} key={question.id} updateQuestion={this.updateQuestion} />
+                )}
             </div>
-        )
+        );
     }
 }
 

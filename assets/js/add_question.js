@@ -39,7 +39,6 @@ class AddQuestion extends React.Component{
         e.preventDefault();
         var newQuestion = this.state.newQuestion;
         var newAnswer = this.state.newAnswer;
-        console.log(newQuestion, newAnswer)
         this.sendQuestionToServer({
             question: newQuestion,
             correctAnswer: newAnswer
@@ -51,7 +50,6 @@ class AddQuestion extends React.Component{
     }
 
     render() {
-        console.log("initial state: ", this.state.newQuestion, this.state.newAnswer)
         return (
             <form className="add-question" onSubmit={this.handleSubmit}>
                 <h2>Add Question</h2>
