@@ -12,7 +12,6 @@ class ViewQuestions extends React.Component{
         this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this);
         this.updateQuestion = this.updateQuestion.bind(this)
         this.deleteQuestion = this.deleteQuestion.bind(this)
- 
     }
 
     loadQuestionsFromServer(){
@@ -47,8 +46,6 @@ class ViewQuestions extends React.Component{
             xsrfHeaderName: "X-CSRFTOKEN",
         });
     }
-
-    
 
     componentDidMount() {
         this.loadQuestionsFromServer();

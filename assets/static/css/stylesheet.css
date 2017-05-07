@@ -23,3 +23,19 @@ body {
 .question-box p {
     cursor: pointer;
 }
+
+.deleted-question-message {
+    font-style:italic; 
+    color:red;
+    margin-left: 20px;
+}
+
+.question-menu-buttons {
+    margin-left: 5px;
+}
+
+.question-save-success-message {
+    text-align: center;
+    font-style: italic;
+    color: green;
+}

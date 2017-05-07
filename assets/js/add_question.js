@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import SaveSuccessMessage from './saved_question_success_msg';
 
 
-class AddQuestion extends React.Component{
+export default class AddQuestion extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            savedQuestion: '',
             newQuestion: '',
             newAnswer: ''
         }
@@ -21,7 +23,6 @@ class AddQuestion extends React.Component{
         });
     }
 
-    // redo this using axios npm package for making api post requests
     sendQuestionToServer(newQuestion){
         axios({
             method: 'post',
@@ -35,7 +36,6 @@ class AddQuestion extends React.Component{
     }
     
     handleSubmit(e) {
-    // prevent the default behavior of submitting a form??
         e.preventDefault();
         var newQuestion = this.state.newQuestion;
         var newAnswer = this.state.newAnswer;
@@ -44,23 +44,29 @@ class AddQuestion extends React.Component{
             correctAnswer: newAnswer
         });
         this.setState({
-            question: "",
-            answer: ""
+            savedQuestion: newQuestion,
+            newQuestion: "",
+            newAnswer: ""
         });
     }
 
     render() {
         return (
-            <form className="add-question" onSubmit={this.handleSubmit}>
+            <div>
                 <h2>Add Question</h2>
-                <input name="newQuestion" type="text" value={this.state.newQuestion} onChange={this.handleChange} />
-                <br />
-                <input name="newAnswer" type="text" value={this.state.newAnswer} onChange={this.handleChange} />
-                <br />
-                <input type="submit" value="submit" />
-            </form>
+                <form>
+                    <div className="form-group">
+                        <label htmlFor="newQuestion">Question:</label>
+                        <input id="newQuestionId" className="form-control" name="newQuestion" type="text" value={this.state.newQuestion} onChange={this.handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="newAnswer">Correct Answer:</label>
+                        <input id="newAnswerId" className="form-control" name="newAnswer" type="text" value={this.state.newAnswer} onChange={this.handleChange} />
+                    </div>
+                    <button onClick={this.handleSubmit} type="submit" className="btn btn-default">Save</button>
+                </form>
+                <SaveSuccessMessage savedQuestion={this.state.savedQuestion} />
+            </div>
         );
     }
 }
-
-export {AddQuestion};

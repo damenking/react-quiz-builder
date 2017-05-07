@@ -3,7 +3,7 @@ import React from 'react';
 import {Welcome} from './welcome';
 import {ViewQuestions} from './view_questions';
 import {Menu} from './menu';
-import {AddQuestion} from './add_question';
+import AddQuestion from './add_question';
 
 class MainWindow extends React.Component {
     constructor(props) {
