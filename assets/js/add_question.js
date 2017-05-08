@@ -8,6 +8,7 @@ export default class AddQuestion extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            saveSuccess: false,
             savedQuestion: '',
             newQuestion: '',
             newCorrectAnswer: '',
@@ -44,11 +45,22 @@ export default class AddQuestion extends React.Component{
             },
             xsrfHeaderName: "X-CSRFTOKEN",
         })
-        .then(function(response) {
+        .then(response => {
             console.log("success? ", response)
+            this.setState({ 
+                saveSuccess: true,
+                newQuestion: '',
+                newCorrectAnswer: '',
+                newIncorrectAnswer1: '',
+                newIncorrectAnswer2: '',
+                newIncorrectAnswer3: '', 
+            })
+            console.log(this.state)
         })
-        .catch(function(error) {
+        .catch(error => {
             console.log("error? ", error)
+            this.setState({ saveSuccess: false })
+            console.log(this.state)
         })
     }
     
@@ -72,12 +84,7 @@ export default class AddQuestion extends React.Component{
             incorrectAnswer3: newIncorrectAnswer3
         });
         this.setState({
-            savedQuestion: newQuestion,
-            newQuestion: '',
-            newCorrectAnswer: '',
-            newIncorrectAnswer1: '',
-            newIncorrectAnswer2: '',
-            newIncorrectAnswer3: '',
+            savedQuestion: newQuestion,        
         });
     }
 
@@ -110,7 +117,7 @@ export default class AddQuestion extends React.Component{
                         handleChange={this.handleChange} />
                     <button onClick={this.handleSubmit} type="submit" className="btn btn-default">Save</button>
                 </form>
-                <SaveSuccessMessage savedQuestion={this.state.savedQuestion} />
+                <SaveSuccessMessage savedQuestion={this.state.savedQuestion} saveSuccess={this.state.saveSuccess } />
             </div>
         );
     }

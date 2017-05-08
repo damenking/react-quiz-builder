@@ -14,7 +14,7 @@ class Question(models.Model):
     incorrectAnswer1 = models.CharField(max_length = 255, blank=True)
     incorrectAnswer2 = models.CharField(max_length = 255, blank=True)
     incorrectAnswer3 = models.CharField(max_length = 255, blank=True)
-    correctAnswer = models.CharField(max_length = 255, blank=True)
+    correctAnswer = models.CharField(max_length = 255)
     questionTopic = models.ForeignKey(Topic, related_name="questions")
 
     def __str__(self):

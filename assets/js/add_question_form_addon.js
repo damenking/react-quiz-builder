@@ -13,8 +13,8 @@ export default function AddQuestionFormAddOn (props) {
         return (
             <div className="form-group">
                 <label htmlFor="newCorrectAnswer">Correct Answer:</label><br />
-                <input name="newCorrectAnswer" type="radio" value="true" onChange={props.handleChange} /> True <br />
-                <input name="newCorrectAnswer" type="radio" value="false" onChange={props.handleChange} /> False <br />
+                <input name="newCorrectAnswer" type="radio" value="true" onChange={props.handleChange} checked={props.newCorrectAnswer == "true"} /> True <br />
+                <input name="newCorrectAnswer" type="radio" value="false" onChange={props.handleChange} checked={props.newCorrectAnswer == "false"} /> False <br />
             </div>
         )
     }
