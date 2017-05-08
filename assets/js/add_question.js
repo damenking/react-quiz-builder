@@ -43,7 +43,13 @@ export default class AddQuestion extends React.Component{
                 incorrectAnswer3: newQuestion.incorrectAnswer3
             },
             xsrfHeaderName: "X-CSRFTOKEN",
-        });
+        })
+        .then(function(response) {
+            console.log("success? ", response)
+        })
+        .catch(function(error) {
+            console.log("error? ", error)
+        })
     }
     
     handleSubmit(e) {
@@ -82,9 +88,13 @@ export default class AddQuestion extends React.Component{
                 <form>
                     <div className="form-group">
                         <label htmlFor="newQuestion">Question:</label>
-                        <input id="newQuestionId" className="form-control" name="newQuestion" type="text" value={this.state.newQuestion} onChange={this.handleChange} />
+                        <input 
+                            id="newQuestionId" 
+                            className="form-control" 
+                            name="newQuestion" type="text" 
+                            value={this.state.newQuestion} 
+                            onChange={this.handleChange} />
                     </div>
-                    
                     <div className="form-group">
                         <label htmlFor="newQuestionType">Question Type:</label><br />
                         <input type="radio" name="newQuestionType" value="trueOrFalse" onChange={this.handleChange} /> True/False<br />
