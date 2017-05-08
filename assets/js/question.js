@@ -1,4 +1,6 @@
 import React from 'react';
+import EditQuestion from './edit_question_form';
+import ViewQuestion from './view_question_instance';
 
 
 export default class Question extends React.Component{
@@ -52,21 +54,12 @@ export default class Question extends React.Component{
     render() {
         if (this.state.edit) {
             return (
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="question">Question:</label>
-                        <input id="editQuestionId" name="question" className="form-control" type="text" value={this.state.thisQuestion.question} onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="correctAnswer">Correct Answer:</label>
-                        <input id="editCorrectAnswerId" name="correctAnswer" className="form-control" type="text" value={this.state.thisQuestion.correctAnswer} onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <button onClick={this.handleCancelEdit} type="submit" className="btn btn-default btn-sm question-menu-buttons">Close</button>
-                        <button onClick={this.handleSave} type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
-                        <button onClick={this.handleDelete} type="subtmi" className="btn btn-danger btn-sm question-menu-buttons">Delete</button>
-                    </div>
-                </form>
+                <EditQuestion 
+                    thisQuestion={this.state.thisQuestion}
+                    handleCancelEdit={this.handleCancelEdit}
+                    handleChange={this.handleChange}
+                    handleSave={this.handleSave}
+                    handleDelete={this.handleDelete} />
             )
         }
         else if (this.state.deleted) {
@@ -77,14 +70,6 @@ export default class Question extends React.Component{
                 </div>
             )
         }
-        return (
-            <div className="question-box" onClick={this.editQuestion}>
-                <hr />
-                <strong>Question:</strong>
-                <p>{this.props.item.question}</p>
-                <strong>Answer:</strong>
-                <p>{this.props.item.correctAnswer}</p>        
-            </div>
-        );
+        return <ViewQuestion editQuestion={this.editQuestion} thisQuestion={this.state.thisQuestion} />
     }
 }
