@@ -41,7 +41,12 @@ class ViewQuestions extends React.Component{
             url: instanceUrl,
             data: {
                 question: updatedQuestion.question,
-                correctAnswer: updatedQuestion.correctAnswer
+                questionType: updatedQuestion.questionType,
+                correctAnswer: updatedQuestion.correctAnswer,
+                incorrectAnswer1: updatedQuestion.incorrectAnswer1,
+                incorrectAnswer2: updatedQuestion.incorrectAnswer2,
+                incorrectAnswer3: updatedQuestion.incorrectAnswer3,
+                questionTopic: updatedQuestion.questionTopic
             },
             xsrfHeaderName: "X-CSRFTOKEN",
         });

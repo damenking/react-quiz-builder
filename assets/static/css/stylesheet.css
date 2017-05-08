@@ -39,3 +39,9 @@ body {
     font-style: italic;
     color: green;
 }
+
+.question-save-failure-message {
+    text-align: center;
+    font-style: italic;
+    color: red;
+}
