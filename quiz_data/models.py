@@ -11,10 +11,9 @@ class Topic(models.Model):
 class Question(models.Model): 
     question = models.CharField(max_length = 255)
     questionType = models.CharField(max_length = 255)
-    possibleAnswerA = models.CharField(max_length = 255, blank=True)
-    possibleAnswerB = models.CharField(max_length = 255, blank=True)
-    possibleAnswerC = models.CharField(max_length = 255, blank=True)
-    possibleAnswerD = models.CharField(max_length = 255, blank=True)
+    incorrectAnswer1 = models.CharField(max_length = 255, blank=True)
+    incorrectAnswer2 = models.CharField(max_length = 255, blank=True)
+    incorrectAnswer3 = models.CharField(max_length = 255, blank=True)
     correctAnswer = models.CharField(max_length = 255, blank=True)
     questionTopic = models.ForeignKey(Topic, related_name="questions")
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import SaveSuccessMessage from './saved_question_success_msg';
+import AddQuestionFormAddOn from './add_question_form_addon';
 
 
 export default class AddQuestion extends React.Component{
@@ -9,7 +10,12 @@ export default class AddQuestion extends React.Component{
         this.state = {
             savedQuestion: '',
             newQuestion: '',
-            newAnswer: ''
+            newCorrectAnswer: '',
+            newQuestionType: '',
+            newIncorrectAnswer1: '',
+            newIncorrectAnswer2: '',
+            newIncorrectAnswer3: '',
+            newQuestionTopic: 1,
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -29,7 +35,12 @@ export default class AddQuestion extends React.Component{
             url: this.props.url,
             data: {
                 question: newQuestion.question,
-                correctAnswer: newQuestion.correctAnswer
+                correctAnswer: newQuestion.correctAnswer,
+                questionTopic: newQuestion.questionTopic,
+                questionType: newQuestion.questionType,
+                incorrectAnswer1: newQuestion.incorrectAnswer1,
+                incorrectAnswer2: newQuestion.incorrectAnswer2,
+                incorrectAnswer3: newQuestion.incorrectAnswer3
             },
             xsrfHeaderName: "X-CSRFTOKEN",
         });
@@ -38,15 +49,29 @@ export default class AddQuestion extends React.Component{
     handleSubmit(e) {
         e.preventDefault();
         var newQuestion = this.state.newQuestion;
-        var newAnswer = this.state.newAnswer;
+        var newQuestionType = this.state.newQuestionType;
+        var newCorrectAnswer = this.state.newCorrectAnswer;
+        var newQuestionTopic = this.state.newQuestionTopic;
+        var newIncorrectAnswer1 = this.state.newIncorrectAnswer1;
+        var newIncorrectAnswer2 = this.state.newIncorrectAnswer2;
+        var newIncorrectAnswer3 = this.state.newIncorrectAnswer3;
+
         this.sendQuestionToServer({
             question: newQuestion,
-            correctAnswer: newAnswer
+            questionType: newQuestionType,
+            correctAnswer: newCorrectAnswer,
+            questionTopic: newQuestionTopic,
+            incorrectAnswer1: newIncorrectAnswer1,
+            incorrectAnswer2: newIncorrectAnswer2,
+            incorrectAnswer3: newIncorrectAnswer3
         });
         this.setState({
             savedQuestion: newQuestion,
-            newQuestion: "",
-            newAnswer: ""
+            newQuestion: '',
+            newCorrectAnswer: '',
+            newIncorrectAnswer1: '',
+            newIncorrectAnswer2: '',
+            newIncorrectAnswer3: '',
         });
     }
 
@@ -59,10 +84,20 @@ export default class AddQuestion extends React.Component{
                         <label htmlFor="newQuestion">Question:</label>
                         <input id="newQuestionId" className="form-control" name="newQuestion" type="text" value={this.state.newQuestion} onChange={this.handleChange} />
                     </div>
+                    
                     <div className="form-group">
-                        <label htmlFor="newAnswer">Correct Answer:</label>
-                        <input id="newAnswerId" className="form-control" name="newAnswer" type="text" value={this.state.newAnswer} onChange={this.handleChange} />
+                        <label htmlFor="newQuestionType">Question Type:</label><br />
+                        <input type="radio" name="newQuestionType" value="trueOrFalse" onChange={this.handleChange} /> True/False<br />
+                        <input type="radio" name="newQuestionType" value="multipleChoice" onChange={this.handleChange} /> Multiple Choice<br />
+                        <input type="radio" name="newQuestionType" value="freeForm" onChange={this.handleChange} /> Free Form
                     </div>
+                    <AddQuestionFormAddOn 
+                        newQuestionType={this.state.newQuestionType} 
+                        newCorrectAnswer={this.state.newCorrectAnswer}
+                        newIncorrectAnswer1={this.state.newIncorrectAnswer1}
+                        newIncorrectAnswer2={this.state.newIncorrectAnswer2}
+                        newIncorrectAnswer3={this.state.newIncorrectAnswer3} 
+                        handleChange={this.handleChange} />
                     <button onClick={this.handleSubmit} type="submit" className="btn btn-default">Save</button>
                 </form>
                 <SaveSuccessMessage savedQuestion={this.state.savedQuestion} />
