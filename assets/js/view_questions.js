@@ -57,11 +57,10 @@ class ViewQuestions extends React.Component{
     }
 
     render() {
-        var questionList = this.state.data
         return (
             <div>
                 <h2>Question List</h2>
-                {questionList.map((question) =>
+                {this.state.data.map((question) =>
                     <Question item={question} key={question.id} updateQuestion={this.updateQuestion} deleteQuestion={this.deleteQuestion}/>
                 )}
             </div>

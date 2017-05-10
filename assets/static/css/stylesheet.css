@@ -45,3 +45,7 @@ body {
     font-style: italic;
     color: red;
 }
+
+.form-control.topic-select {
+    width:30%;
+}

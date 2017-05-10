@@ -15,17 +15,8 @@ class MainWindow extends React.Component {
         this.viewQuestionsScreen = this.viewQuestionsScreen.bind(this)
         this.viewWelcomeScreen = this.viewWelcomeScreen.bind(this)
         this.addQuestionScreen = this.addQuestionScreen.bind(this)
-        this.setScreenState = this.setScreenState.bind(this)
     }
 
-    setScreenState(screen) {
-        if (screen == 'viewQuestions')
-            this.setState({ currentScreen: 'viewQuestions' })
-        else if (screen == 'welcome')
-            this.setState({ currentScreen: 'welcome' })
-        else if (screen == 'addQuestion')
-            this.setState({ currentScreen: 'addQuestion'})
-    }
     viewQuestionsScreen() {
         this.setState({ currentScreen: 'viewQuestions' })
     }

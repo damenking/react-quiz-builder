@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SaveSuccessMessage from './saved_question_success_msg';
 import AddQuestionFormAddOn from './add_question_form_addon';
+import SelectTopic from './select_topic';
 
 
 export default class AddQuestion extends React.Component{
@@ -20,6 +21,7 @@ export default class AddQuestion extends React.Component{
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleTopicSelect = this.handleTopicSelect.bind(this)
     }
 
     handleChange(event) {
@@ -46,7 +48,6 @@ export default class AddQuestion extends React.Component{
             xsrfHeaderName: "X-CSRFTOKEN",
         })
         .then(response => {
-            console.log("success? ", response)
             this.setState({ 
                 saveSuccess: true,
                 newQuestion: '',
@@ -55,12 +56,9 @@ export default class AddQuestion extends React.Component{
                 newIncorrectAnswer2: '',
                 newIncorrectAnswer3: '', 
             })
-            console.log(this.state)
         })
         .catch(error => {
-            console.log("error? ", error)
             this.setState({ saveSuccess: false })
-            console.log(this.state)
         })
     }
     
@@ -88,11 +86,21 @@ export default class AddQuestion extends React.Component{
         });
     }
 
+
+    handleTopicSelect(event) {
+        var newSelectedTopic = event.target.value;
+        this.setState({ newQuestionTopic: newSelectedTopic })
+    }
+
     render() {
         return (
             <div>
                 <h2>Add Question</h2>
                 <form>
+                    <SelectTopic 
+                        selectedTopic={this.state.newQuestionTopic} 
+                        handleTopicSelect={this.handleTopicSelect} 
+                        url="/api/topics/" />
                     <div className="form-group">
                         <label htmlFor="newQuestion">Question:</label>
                         <input 
@@ -106,7 +114,7 @@ export default class AddQuestion extends React.Component{
                         <label htmlFor="newQuestionType">Question Type:</label><br />
                         <input type="radio" name="newQuestionType" value="trueOrFalse" onChange={this.handleChange} /> True/False<br />
                         <input type="radio" name="newQuestionType" value="multipleChoice" onChange={this.handleChange} /> Multiple Choice<br />
-                        <input type="radio" name="newQuestionType" value="freeForm" onChange={this.handleChange} /> Free Form
+                        <input type="radio" name="newQuestionType" value="freeForm" onChange={this.handleChange} /> Freeform
                     </div>
                     <AddQuestionFormAddOn 
                         newQuestionType={this.state.newQuestionType} 
