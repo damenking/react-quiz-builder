@@ -17,11 +17,10 @@ export default class AddQuestion extends React.Component{
             newIncorrectAnswer1: '',
             newIncorrectAnswer2: '',
             newIncorrectAnswer3: '',
-            newQuestionTopic: 1,
+            topicSelect: '',
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleTopicSelect = this.handleTopicSelect.bind(this)
     }
 
     handleChange(event) {
@@ -67,7 +66,7 @@ export default class AddQuestion extends React.Component{
         var newQuestion = this.state.newQuestion;
         var newQuestionType = this.state.newQuestionType;
         var newCorrectAnswer = this.state.newCorrectAnswer;
-        var newQuestionTopic = this.state.newQuestionTopic;
+        var newQuestionTopic = this.state.topicSelect;
         var newIncorrectAnswer1 = this.state.newIncorrectAnswer1;
         var newIncorrectAnswer2 = this.state.newIncorrectAnswer2;
         var newIncorrectAnswer3 = this.state.newIncorrectAnswer3;
@@ -86,20 +85,14 @@ export default class AddQuestion extends React.Component{
         });
     }
 
-
-    handleTopicSelect(event) {
-        var newSelectedTopic = event.target.value;
-        this.setState({ newQuestionTopic: newSelectedTopic })
-    }
-
     render() {
         return (
             <div>
                 <h2>Add Question</h2>
                 <form>
                     <SelectTopic 
-                        selectedTopic={this.state.newQuestionTopic} 
-                        handleTopicSelect={this.handleTopicSelect} 
+                        topicSelect={this.state.topicSelect} 
+                        handleChange={this.handleChange} 
                         url="/api/topics/" />
                     <div className="form-group">
                         <label htmlFor="newQuestion">Question:</label>

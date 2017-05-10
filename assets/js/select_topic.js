@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+
 export default class SelectTopic extends React.Component {
     constructor(props) {
         super(props);
@@ -28,13 +29,14 @@ export default class SelectTopic extends React.Component {
     render() {
         return (
             <div className="form-group">
-                <label>Question Topic:</label>
+                <label>Topic:</label>
                 <select 
                     id="topicSelectId" 
                     name="topicSelect" 
                     className="form-control topic-select" 
-                    onChange={this.props.handleTopicSelect} 
-                    value={this.props.selectedTopic}>
+                    onChange={this.props.handleChange} 
+                    value={this.props.topicSelect}>
+                    <option>Select..</option>
                 {this.state.topics.map((topic) =>
                     <option key={topic.id} value={topic.id}>{topic.name}</option>
                 )}
