@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import EditTopic from './topic_form';
+import ModifyTopicLinks from './topic_links';
 
 export default class SelectTopic extends React.Component {
     constructor(props) {
@@ -9,8 +9,10 @@ export default class SelectTopic extends React.Component {
         this.state = {
             topics: [],
             editTopic: false,
+            topicSelect: '',
         }
         this.loadTopicsFromServer = this.loadTopicsFromServer.bind(this)
+        this.handleTopicChange = this.handleTopicChange.bind(this)
     }
 
     loadTopicsFromServer(){
@@ -23,11 +25,27 @@ export default class SelectTopic extends React.Component {
             })
         })
     }
+
     componentDidMount() {
         this.loadTopicsFromServer();
     }
 
+    handleTopicChange(event) {
+        var value = event.target.value;
+        console.log("event variable: ", value)
+        console.log("pre setstate state selectTopic: ", this.state.topicSelect)
+        this.setState({
+            topicSelect: event.target.value,
+        });
+        console.log("post setstate state selectTopic: ", this.state.topicSelect)
+        if (this.props.currentScreen == "viewQuestions") {
+            this.props.changeTopic(this.state.topicSelect)
+        }
+    }
+
     render() {
+        
+
         if (this.props.currentScreen == "viewQuestions") {
             return (
                 <div className="form-group">
@@ -36,15 +54,15 @@ export default class SelectTopic extends React.Component {
                         id="topicSelectId" 
                         name="topicSelect" 
                         className="form-control topic-select" 
-                        onChange={this.props.handleChange} 
-                        value={this.props.topicSelect}>
-                        <option className="emphasize-select">Select..</option>
+                        onChange={this.handleTopicChange} 
+                        value={this.state.topicSelect}>
+                        <option className="emphasize-select" value="select">Select..</option>
                     {this.state.topics.map((topic) =>
                         <option key={topic.id} value={topic.id}>{topic.name}</option>
                     )}
                         <option className="emphasize-select" value="all">View All..</option>
                     </select>
-                    <EditTopic editTopic={this.state.editTopic}/>
+                    <ModifyTopicLinks editTopic={this.state.editTopic} topicToEdit={this.state.topicSelect}/>
                 </div>
             )
         }
@@ -56,20 +74,16 @@ export default class SelectTopic extends React.Component {
                         id="topicSelectId" 
                         name="topicSelect" 
                         className="form-control topic-select" 
-                        onChange={this.props.handleChange} 
-                        value={this.props.topicSelect}>
-                        <option className="emphasize-select">Select..</option>
+                        onChange={this.handleTopicChange}
+                        value={this.state.topicSelect}>
+                        <option className="emphasize-select" value="select">Select..</option>
                     {this.state.topics.map((topic) =>
                         <option key={topic.id} value={topic.id}>{topic.name}</option>
                     )}
-                        <option className="emphasize-select" value="new">New Topic..</option>
                     </select>
-                    <EditTopic editTopic={this.state.editTopic}/>
+                    <ModifyTopicLinks editTopic={this.state.editTopic} topicToEdit={this.state.topicSelect}/>
                 </div>
             )
-        }
-        else {
-            return <h1>hmmm</h1>
         }
     }
 }

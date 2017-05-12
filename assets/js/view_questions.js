@@ -11,12 +11,12 @@ class ViewQuestions extends React.Component{
         this.state = {
             data: [],
             topicQuestions: [],
-            topicSelect: 'Select..',
+            topicSelect: '',
         };
         this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this);
         this.updateQuestion = this.updateQuestion.bind(this)
         this.deleteQuestion = this.deleteQuestion.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+        this.handleTopicChange = this.handleTopicChange.bind(this)
         this.filterQuestionsByTopic = this.filterQuestionsByTopic.bind(this)
     }
 
@@ -36,17 +36,13 @@ class ViewQuestions extends React.Component{
     loadQuestionsFromServer(){
         axios({
             method: 'get',
-            url: this.props.url,
+            url: "/api/topics/",
         }).then(response => {
             this.setState({
                 // list of topics
                 data: response.data
             }) 
-            console.log("response:", response) 
-            console.log("response.data:", response.data)    
-            response.data.forEach(topic => {
-                console.log(topic)
-            
+            response.data.forEach(topic => {            
             })
         }).then(this.filterQuestionsByTopic())
     }
@@ -83,19 +79,11 @@ class ViewQuestions extends React.Component{
         });
     }
 
-    handleChange(event) {
-        var name = event.target.name
-        var value = event.target.value
-        console.log("event variable: ", name, value)
-        console.log("pre setstate state selectTopic: ", this.state.topicSelect)
-        this.setState({
-            [name]: value,
-        });
-        console.log("post setstate state selectTopic: ", this.state.topicSelect)
-        if (name == 'topicSelect') {
-            this.filterQuestionsByTopic()
+    handleTopicChange(newTopicSelect) {
+        this.setState({topicSelect: newTopicSelect});
+        console.log("top level topicSelect:", this.state.topicSelect)
+        this.filterQuestionsByTopic()
         }
-    }
 
     render() {
         return (
@@ -103,7 +91,7 @@ class ViewQuestions extends React.Component{
                 <h2>Question List</h2>
                 <SelectTopic 
                         topicSelect={this.state.topicSelect} 
-                        handleChange={this.handleChange}
+                        changeTopic={this.handleTopicChange}
                         currentScreen='viewQuestions' 
                         url="/api/topics/" />
                 {this.state.topicQuestions.map((question) =>

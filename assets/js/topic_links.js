@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EditTopicForm (props) {
+export default function ModifyTopicLinks (props) {
     if (props.editTopic == false 
         && props.topicToEdit != 'select' 
         && props.topicToEdit != 'all' 
