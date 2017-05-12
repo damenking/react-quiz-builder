@@ -92,7 +92,8 @@ export default class AddQuestion extends React.Component{
                 <form>
                     <SelectTopic 
                         topicSelect={this.state.topicSelect} 
-                        handleChange={this.handleChange} 
+                        handleChange={this.handleChange}
+                        currentScreen='addQuestion' 
                         url="/api/topics/" />
                     <div className="form-group">
                         <label htmlFor="newQuestion">Question:</label>

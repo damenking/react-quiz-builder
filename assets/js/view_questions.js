@@ -11,7 +11,7 @@ class ViewQuestions extends React.Component{
         this.state = {
             data: [],
             topicQuestions: [],
-            topicSelect: '',
+            topicSelect: 'Select..',
         };
         this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this);
         this.updateQuestion = this.updateQuestion.bind(this)
@@ -20,16 +20,14 @@ class ViewQuestions extends React.Component{
         this.filterQuestionsByTopic = this.filterQuestionsByTopic.bind(this)
     }
 
-    filterQuestionsByTopic(topicId) {
+    filterQuestionsByTopic() {
         var questionList = [];
-        console.log(topicId)
-        this.setState({ topicSelect: topicId })
-        console.log(this.state.topicSelect)
         this.state.data.forEach(question => {
             if (question.questionTopic == this.state.topicSelect) {
                 questionList.push(question)
             }
         }); 
+        console.log(questionList)
         this.setState({topicQuestions: questionList})
     }
 
@@ -46,7 +44,6 @@ class ViewQuestions extends React.Component{
 
     componentDidMount() {
         this.loadQuestionsFromServer();
-        console.log('rando', this.state.topicSelect)
     }
 
 
@@ -80,16 +77,16 @@ class ViewQuestions extends React.Component{
     handleChange(event) {
         var name = event.target.name
         var value = event.target.value
-        console.log(name, value)
+        console.log("event variable: ", name, value)
+        console.log("pre setstate state selectTopic: ", this.state.topicSelect)
         this.setState({
             [name]: value,
         });
-        console.log(this.state.topicSelect)
+        console.log("post setstate state selectTopic: ", this.state.topicSelect)
         if (name == 'topicSelect') {
-            this.filterQuestionsByTopic(value)
+            this.filterQuestionsByTopic()
         }
     }
-
 
     render() {
         return (
@@ -97,9 +94,10 @@ class ViewQuestions extends React.Component{
                 <h2>Question List</h2>
                 <SelectTopic 
                         topicSelect={this.state.topicSelect} 
-                        handleChange={this.handleChange} 
+                        handleChange={this.handleChange}
+                        currentScreen='viewQuestions' 
                         url="/api/topics/" />
-                {this.state.data.map((question) =>
+                {this.state.topicQuestions.map((question) =>
                     <Question 
                         item={question} 
                         key={question.id} 

@@ -48,4 +48,14 @@ body {
 
 .form-control.topic-select {
     width:30%;
+    font-style: italic;
 }
+
+.topic-link {
+    font-style: italic;
+    cursor: pointer;
+    color: grey;
+    margin-left: 10px;
+    text-decoration:none !important;
+}
+
