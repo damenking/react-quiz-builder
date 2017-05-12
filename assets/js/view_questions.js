@@ -22,10 +22,12 @@ class ViewQuestions extends React.Component{
 
     filterQuestionsByTopic() {
         var questionList = [];
-        this.state.data.forEach(question => {
-            if (question.questionTopic == this.state.topicSelect) {
-                questionList.push(question)
-            }
+        this.state.data.forEach(topic => {
+            if (topic.id == this.state.topicSelect) {
+                topic.questions.forEach(question => {
+                    questionList.push(question)
+                })
+            }     
         }); 
         console.log(questionList)
         this.setState({topicQuestions: questionList})
@@ -37,9 +39,16 @@ class ViewQuestions extends React.Component{
             url: this.props.url,
         }).then(response => {
             this.setState({
+                // list of topics
                 data: response.data
-            })      
-        }).then(this.filterQuestionsByTopic(''))
+            }) 
+            console.log("response:", response) 
+            console.log("response.data:", response.data)    
+            response.data.forEach(topic => {
+                console.log(topic)
+            
+            })
+        }).then(this.filterQuestionsByTopic())
     }
 
     componentDidMount() {

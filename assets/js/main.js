@@ -39,7 +39,7 @@ class MainWindow extends React.Component {
         else if (this.state.currentScreen == 'viewQuestions') {
             return (
                 <div className="well main-window container">
-                    <ViewQuestions url="/api/questions/" />
+                    <ViewQuestions url="/api/topics/" />
                     <Menu viewWelcomeScreen={this.viewWelcomeScreen} viewQuestionsScreen={this.viewQuestionsScreen} addQuestionScreen={this.addQuestionScreen} />
                 </div>
             )

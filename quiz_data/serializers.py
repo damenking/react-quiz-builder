@@ -10,6 +10,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class TopicSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    questions = QuestionSerializer(read_only=True, many=True)
     
     class Meta:
         model = Topic
