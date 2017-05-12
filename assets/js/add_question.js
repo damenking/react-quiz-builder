@@ -21,6 +21,7 @@ export default class AddQuestion extends React.Component{
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleTopicChange = this.handleTopicChange.bind(this)
     }
 
     handleChange(event) {
@@ -61,6 +62,12 @@ export default class AddQuestion extends React.Component{
         })
     }
     
+    ////////////////// one select behind...
+    handleTopicChange(newTopicSelect) {
+        this.setState({topicSelect: newTopicSelect});
+        console.log("top level topicSelect:", this.state.topicSelect)
+    }
+    
     handleSubmit(e) {
         e.preventDefault();
         var newQuestion = this.state.newQuestion;
@@ -92,7 +99,7 @@ export default class AddQuestion extends React.Component{
                 <form>
                     <SelectTopic 
                         topicSelect={this.state.topicSelect} 
-                        handleChange={this.handleChange}
+                        changeTopic={this.handleTopicChange}
                         currentScreen='addQuestion' 
                         url="/api/topics/" />
                     <div className="form-group">

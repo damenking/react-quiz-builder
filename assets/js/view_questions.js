@@ -11,19 +11,17 @@ export default class ViewQuestions extends React.Component{
         this.state = {
             data: [],
             topicQuestions: [],
-            topicSelect: '',
         };
         this.loadQuestionsFromServer = this.loadQuestionsFromServer.bind(this);
         this.updateQuestion = this.updateQuestion.bind(this)
         this.deleteQuestion = this.deleteQuestion.bind(this)
-        this.handleTopicChange = this.handleTopicChange.bind(this)
         this.filterQuestionsByTopic = this.filterQuestionsByTopic.bind(this)
     }
 
-    filterQuestionsByTopic() {
+    filterQuestionsByTopic(selectedTopicId) {
         var questionList = [];
         this.state.data.forEach(topic => {
-            if (topic.id == this.state.topicSelect) {
+            if (topic.id == selectedTopicId) {
                 topic.questions.forEach(question => {
                     questionList.push(question)
                 })
@@ -79,19 +77,13 @@ export default class ViewQuestions extends React.Component{
         });
     }
 
-    handleTopicChange(newTopicSelect) {
-        this.setState({topicSelect: newTopicSelect});
-        console.log("top level topicSelect:", this.state.topicSelect)
-        this.filterQuestionsByTopic()
-        }
-
     render() {
         return (
             <div>
                 <h2>Question List</h2>
                 <SelectTopic 
                         topicSelect={this.state.topicSelect} 
-                        changeTopic={this.handleTopicChange}
+                        changeTopic={this.filterQuestionsByTopic}
                         currentScreen='viewQuestions' 
                         url="/api/topics/" />
                 {this.state.topicQuestions.map((question) =>

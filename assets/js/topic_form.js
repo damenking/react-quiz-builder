@@ -1,12 +1,49 @@
 import React from 'react';
 
-export default function EditTopicForm (props) {
-    if (props.editTopic == false 
-        && props.topicToEdit != 'select' 
-        && props.topicToEdit != 'all' 
-        && props.topicToEdit != '') {
-        return <p><a className="topic-link">New</a><a className="topic-link">Edit</a><a className="topic-link">Delete</a></p>
+
+export default function EditTopicForm (props){
+    if (props.newTopic) {
+        return (
+            <div>
+                <hr />
+                <div className="form-group">
+                    <label htmlFor="question">Topic Name:</label>
+                    <input 
+                        id="newTopicId" 
+                        name="topicSelectName" 
+                        className="form-control topic-select" 
+                        type="text"
+                        value={props.topicSelectName}
+                        onChange={props.handleChange} />
+                </div>
+                <div className="form-group">
+                    <button onClick={props.handleCancelEdit} type="submit" className="btn btn-default btn-sm question-menu-buttons">Close</button>
+                    <button type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
+                </div>
+            </div>
+        )
     }
-    else
-        return <p><a className="topic-link">New</a></p>
+    else {
+        return (
+            <div>
+                <hr />
+                <div className="form-group">
+                    <label htmlFor="question">Topic Name:</label>
+                    <input 
+                        id="newTopicId" 
+                        name="topicSelectName" 
+                        className="form-control topic-select" 
+                        type="text"
+                        value={props.topicSelectName}
+                        onChange={props.handleChange} />
+                </div>
+                <div className="form-group">
+                    <button onClick={props.handleCancelEdit} type="submit" className="btn btn-default btn-sm question-menu-buttons">Close</button>
+                    <button onClick={props.handleSave} type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
+                    <button onClick={props.confirmDelete} type="submit" className="btn btn-danger btn-sm question-menu-buttons">Delete</button>
+                </div>
+            </div>
+        )
+    }
 }
+

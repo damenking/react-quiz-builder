@@ -5,8 +5,17 @@ export default function ModifyTopicLinks (props) {
         && props.topicToEdit != 'select' 
         && props.topicToEdit != 'all' 
         && props.topicToEdit != '') {
-        return <p><a className="topic-link">New</a><a className="topic-link">Edit</a><a className="topic-link">Delete</a></p>
+        return (
+            <p>
+                <a className="topic-link" onClick={props.newTopicClick}>New</a>
+                <a className="topic-link" onClick={props.editTopicClick}>Edit</a>
+            </p>
+        )
     }
     else
-        return <p><a className="topic-link">New</a></p>
+        return (
+            <div onClick={props.newTopicClick}>
+                <a className="topic-link">New</a>
+            </div>
+        )
 }

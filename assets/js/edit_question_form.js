@@ -28,7 +28,7 @@ export default function EditQuestion (props) {
                 <div className="form-group">
                     <button onClick={props.handleCancelEdit} type="submit" className="btn btn-default btn-sm question-menu-buttons">Close</button>
                     <button onClick={props.handleSave} type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
-                    <button onClick={props.handleDelete} type="subtmi" className="btn btn-danger btn-sm question-menu-buttons">Delete</button>
+                    <button onClick={props.handleDelete} type="submit" className="btn btn-danger btn-sm question-menu-buttons">Delete</button>
                 </div>
             </form>
         )
