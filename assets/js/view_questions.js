@@ -4,7 +4,7 @@ import Question from './question';
 import SelectTopic from './select_topic';
 
 
-class ViewQuestions extends React.Component{
+export default class ViewQuestions extends React.Component{
     constructor(props) {
         super(props);
         
@@ -105,5 +105,3 @@ class ViewQuestions extends React.Component{
         );
     }
 }
-
-export {ViewQuestions};

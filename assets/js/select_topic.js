@@ -44,8 +44,6 @@ export default class SelectTopic extends React.Component {
     }
 
     render() {
-        
-
         if (this.props.currentScreen == "viewQuestions") {
             return (
                 <div className="form-group">
