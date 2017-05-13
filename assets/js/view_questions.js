@@ -20,14 +20,22 @@ export default class ViewQuestions extends React.Component{
 
     filterQuestionsByTopic(selectedTopicId) {
         var questionList = [];
-        this.state.data.forEach(topic => {
-            if (topic.id == selectedTopicId) {
+        if (selectedTopicId == 'all') {
+            this.state.data.forEach(topic => {
                 topic.questions.forEach(question => {
                     questionList.push(question)
                 })
-            }     
-        }); 
-        console.log(questionList)
+            })
+        }
+        else {
+            this.state.data.forEach(topic => {
+                if (topic.id == selectedTopicId) {
+                    topic.questions.forEach(question => {
+                        questionList.push(question)
+                    })
+                }     
+            }); 
+        }
         this.setState({topicQuestions: questionList})
     }
 
@@ -40,8 +48,6 @@ export default class ViewQuestions extends React.Component{
                 // list of topics
                 data: response.data
             }) 
-            response.data.forEach(topic => {            
-            })
         }).then(this.filterQuestionsByTopic())
     }
 

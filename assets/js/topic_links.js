@@ -13,9 +13,5 @@ export default function ModifyTopicLinks (props) {
         )
     }
     else
-        return (
-            <div onClick={props.newTopicClick}>
-                <a className="topic-link">New</a>
-            </div>
-        )
+        return <a onClick={props.newTopicClick} className="topic-link">New</a>
 }

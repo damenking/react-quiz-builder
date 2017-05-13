@@ -4,6 +4,10 @@ import ModifyTopicLinks from './topic_links';
 import EditTopicForm from './topic_form';
 import ConfirmTopicDelete from './confirm_topic_delete';
 
+// I realize this is a waaay oversized component and probably has some redundency/ineffiencies 
+// but adding the topic layer over the question layer added unforseen complexity so I kept
+// everyting in the same place to troubleshoot easier and get it to work! :)
+
 export default class SelectTopic extends React.Component {
     constructor(props) {
         super(props);
@@ -21,12 +25,56 @@ export default class SelectTopic extends React.Component {
         this.editTopicClick = this.editTopicClick.bind(this)
         this.newTopicClick = this.newTopicClick.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleSave = this.handleSave.bind(this)
         this.handleCancelEdit = this.handleCancelEdit.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
         this.confirmDelete = this.confirmDelete.bind(this)
+        this.sendNewTopicToServer = this.sendNewTopicToServer.bind(this)
+        this.handleTopicUpdateSave = this.handleTopicUpdateSave.bind(this)
+        this.handleNewTopicSave = this.handleNewTopicSave.bind(this)
+        this.deleteTopicOnServer = this.deleteTopicOnServer.bind(this)
+        this.sendTopicUpdateToServer = this.sendTopicUpdateToServer.bind(this)
     }
 
+
+    sendNewTopicToServer(){
+        var newName = this.state.topicSelectName
+        axios({
+            method: 'post',
+            url: this.props.url,
+            data: {
+                name: newName,
+            },
+            xsrfHeaderName: "X-CSRFTOKEN",
+        })
+        .then(response => {
+            this.setState({ 
+                editTopic:false,
+                newTopic:false,
+                topicSelectId:'',
+                topicSelectName:'',
+            })
+            this.loadTopicsFromServer()
+        })
+    }
+
+    sendTopicUpdateToServer() {
+        var instanceUrl = this.props.url + this.state.topicSelectId + "/"
+        axios({
+            method: 'put',
+            url: instanceUrl,
+            data: {
+                name: this.state.topicSelectName
+            },
+            xsrfHeaderName: "X-CSRFTOKEN",
+        }).then(response => {
+            this.setState({ 
+                editTopic:false,
+                newTopic:false,
+            })
+            this.loadTopicsFromServer()
+        })
+    }
+    
     loadTopicsFromServer(){
         axios({
             method: 'get',
@@ -65,6 +113,7 @@ export default class SelectTopic extends React.Component {
             newTopic:true,
             editTopic:true,
             topicSelectId:'',
+            topicSelectName:'',
         })
     }
 
@@ -82,9 +131,20 @@ export default class SelectTopic extends React.Component {
         this.setState({confirmDelete:true})
     }
 
+    deleteTopicOnServer(topicId) {
+        var instanceUrl = this.props.url + topicId + "/"
+        axios({
+            method: 'delete',
+            url: instanceUrl,
+            xsrfHeaderName: "X-CSRFTOKEN",
+        }).then(response => {
+            this.loadTopicsFromServer()
+        })
+    }
+
     handleDelete(e) {
         e.preventDefault();
-        // this.props.deleteQuestion(this.state.thisQuestion.id)
+        this.deleteTopicOnServer(this.state.topicSelectId)
         this.setState({ 
             editTopic:false,
             newTopic:false,
@@ -99,21 +159,18 @@ export default class SelectTopic extends React.Component {
         this.setState({
             editTopic:false,
             newTopic:false,
-            topicSelectId:'',
-            topicSelectName:'',
             confirmDelete:false,
          })
     }
 
-    handleSave(e) {
+    handleTopicUpdateSave(e) {
         e.preventDefault();
-        //this.updateTopic(this.state.thisQuestion);
-        this.setState({
-            edit:false,
-            newTopic:false,
-            topicSelectId:'',
-            topicSelectName:'',
-            })
+        this.sendTopicUpdateToServer()
+    }
+
+    handleNewTopicSave(e) {
+        e.preventDefault();
+        this.sendNewTopicToServer();
     }
 
     render() {
@@ -129,8 +186,9 @@ export default class SelectTopic extends React.Component {
                     handleChange={this.handleChange} 
                     topicSelectName={this.state.topicSelectName}
                     handleCancelEdit={this.handleCancelEdit}
-                    handleSave={this.handleSave}
-                    confirmDelete={this.confirmDelete} />
+                    handleNewTopicSave={this.handleNewTopicSave}
+                    confirmDelete={this.confirmDelete}
+                    handleTopicUpdateSave={this.handleTopicUpdateSave} />
             )
         }
 

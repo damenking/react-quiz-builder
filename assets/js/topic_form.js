@@ -18,7 +18,7 @@ export default function EditTopicForm (props){
                 </div>
                 <div className="form-group">
                     <button onClick={props.handleCancelEdit} type="submit" className="btn btn-default btn-sm question-menu-buttons">Close</button>
-                    <button type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
+                    <button onClick={props.handleNewTopicSave} type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
                 </div>
             </div>
         )
@@ -39,7 +39,7 @@ export default function EditTopicForm (props){
                 </div>
                 <div className="form-group">
                     <button onClick={props.handleCancelEdit} type="submit" className="btn btn-default btn-sm question-menu-buttons">Close</button>
-                    <button onClick={props.handleSave} type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
+                    <button onClick={props.handleTopicUpdateSave} type="submit" className="btn btn-primary btn-sm question-menu-buttons">Save</button>
                     <button onClick={props.confirmDelete} type="submit" className="btn btn-danger btn-sm question-menu-buttons">Delete</button>
                 </div>
             </div>
