@@ -5,7 +5,6 @@ export default class QuizForms extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            gradedQuestions: {},
         }
     }
 
@@ -22,6 +21,10 @@ export default class QuizForms extends React.Component {
                         handleAnswerChange={this.props.handleAnswerChange}
                         />
                 )}
+                <br />
+                <br />
+                <button onClick={this.props.handleQuizSubmit} type="button" className="btn btn-success btn-lg">Submit</button>
+                <br />
             </div>
         )
     }

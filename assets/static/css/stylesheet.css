@@ -72,3 +72,9 @@ span.question-number-indicator p {
 .form-control.answer-form {
     width: 50%;
 }
+
+.quiz-answer-result img {
+    max-height: 50px;
+    max-width: 50px;
+    margin-left: 10px;
+}
