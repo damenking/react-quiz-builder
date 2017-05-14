@@ -62,3 +62,13 @@ body {
 .confirm-delete-message {
     text-align:center;
 }
+
+span.question-number-indicator p {
+    font-style: italic;
+    font-size: small;
+    margin-left: 18px;
+}
+
+.form-control.answer-form {
+    width: 50%;
+}

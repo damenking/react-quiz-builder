@@ -217,6 +217,24 @@ export default class SelectTopic extends React.Component {
                 </div>
             )
         }
+        else if (this.props.currentScreen == "takeQuiz") {
+            return (
+                <div className="form-group">
+                    <label>Topic:</label>
+                    <select 
+                        id="topicSelectIdId" 
+                        name="topicSelectId" 
+                        className="form-control topic-select" 
+                        onChange={this.handleTopicChange}
+                        value={this.state.topicSelectId}>
+                        <option className="emphasize-select" value="select">Select..</option>
+                    {this.state.topics.map((topic) =>
+                        <option key={topic.id} value={topic.id}>{topic.name}</option>
+                    )}
+                    </select>
+                </div>
+            )
+        }
         else if (this.props.currentScreen == "addQuestion") {
             return (
                 <div className="form-group">
