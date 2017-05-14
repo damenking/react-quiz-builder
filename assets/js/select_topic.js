@@ -206,7 +206,7 @@ export default class SelectTopic extends React.Component {
                     {this.state.topics.map((topic) =>
                         <option key={topic.id} value={topic.id}>{topic.name}</option>
                     )}
-                        <option className="emphasize-select" value="all">View All..</option>
+                        <option className="emphasize-select" value="all">All..</option>
                     </select>
                     <ModifyTopicLinks 
                         editTopic={this.state.editTopic} 
