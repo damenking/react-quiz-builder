@@ -42,7 +42,7 @@ export default class ViewQuestions extends React.Component{
     loadQuestionsFromServer(){
         axios({
             method: 'get',
-            url: "/api/topics/",
+            url: "/quiz_builder/api/topics/",
         }).then(response => {
             this.setState({
                 // list of topics
@@ -91,7 +91,7 @@ export default class ViewQuestions extends React.Component{
                         topicSelect={this.state.topicSelect} 
                         changeTopic={this.filterQuestionsByTopic}
                         currentScreen='viewQuestions' 
-                        url="/api/topics/" />
+                        url="/quiz_builder/api/topics/" />
                 {this.state.topicQuestions.map((question) =>
                     <Question 
                         item={question} 

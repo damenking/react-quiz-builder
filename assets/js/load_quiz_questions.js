@@ -68,7 +68,7 @@ export default class LoadQuizQuestions extends React.Component{
     loadQuestionsFromServer(){
         axios({
             method: 'get',
-            url: "/api/topics/",
+            url: "/quiz_builder/api/topics/",
         }).then(response => {
             this.setState({
                 // list of topics
@@ -142,7 +142,7 @@ export default class LoadQuizQuestions extends React.Component{
                     <SelectTopic 
                             changeTopic={this.filterQuestionsByTopic}
                             currentScreen='takeQuiz' 
-                            url="/api/topics/" />               
+                            url="/quiz_builder/api/topics/" />               
                 </div>
             );
         }
@@ -155,7 +155,7 @@ export default class LoadQuizQuestions extends React.Component{
                             topicSelect={this.state.topicSelect} 
                             changeTopic={this.filterQuestionsByTopic}
                             currentScreen='takeQuiz' 
-                            url="/api/topics/" />
+                            url="/quiz_builder/api/topics/" />
                     <button onClick={this.handleTakeTestClick} type="button" className="btn btn-success btn-lg">Take Quiz</button>
                     <span className="question-number-indicator"><p>({questionNumber} questions)</p></span>
                 </div>
