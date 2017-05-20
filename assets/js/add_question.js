@@ -36,6 +36,7 @@ export default class AddQuestion extends React.Component{
         axios({
             method: 'post',
             url: this.props.url,
+            
             data: {
                 question: newQuestion.question,
                 correctAnswer: newQuestion.correctAnswer,
@@ -65,7 +66,6 @@ export default class AddQuestion extends React.Component{
     ////////////////// one select behind...
     handleTopicChange(newTopicSelect) {
         this.setState({topicSelect: newTopicSelect});
-        console.log("top level topicSelect:", this.state.topicSelect)
     }
     
     handleSubmit(e) {
@@ -75,7 +75,6 @@ export default class AddQuestion extends React.Component{
         var newCorrectAnswer = this.state.newCorrectAnswer;
         var newQuestionTopic = this.state.topicSelect;
         var newIncorrectAnswer1 = this.state.newIncorrectAnswer1;
-        var newIncorrectAnswer2 = this.state.newIncorrectAnswer2;
         var newIncorrectAnswer3 = this.state.newIncorrectAnswer3;
 
         this.sendQuestionToServer({
@@ -101,7 +100,7 @@ export default class AddQuestion extends React.Component{
                         topicSelect={this.state.topicSelect} 
                         changeTopic={this.handleTopicChange}
                         currentScreen='addQuestion' 
-                        url="/api/topics/" />
+                        url="/quiz_builder/api/topics/" />
                     <div className="form-group">
                         <label htmlFor="newQuestion">Question:</label>
                         <input 

@@ -93,10 +93,7 @@ export default class SelectTopic extends React.Component {
 ////////// one select behind...
     handleTopicChange(event) {
         var value = event.target.value;
-        console.log("event variable: ", value)
-        console.log("pre setstate state selectTopic: ", this.state.topicSelectId)
         this.setState({topicSelectId: value});
-        console.log("post setstate state selectTopic: ", this.state.topicSelectId)
         this.props.changeTopic(value)
         this.state.topics.forEach(topic => {
             if (topic.id == value)
@@ -123,7 +120,6 @@ export default class SelectTopic extends React.Component {
         this.setState({
             [name]: value,
         })
-        console.log(this.state)
     }
 
     confirmDelete(e) {

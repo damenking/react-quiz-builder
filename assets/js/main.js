@@ -49,7 +49,7 @@ export default class MainWindow extends React.Component {
         else if (this.state.currentScreen == 'viewQuestions') {
             return (
                 <div className="well main-window container">
-                    <ViewQuestions url="/api/questions/" />
+                    <ViewQuestions url="/quiz_builder/api/questions/" />
                     <Menu 
                         takeQuizScreen={this.takeQuizScreen} 
                         viewWelcomeScreen={this.viewWelcomeScreen} 
@@ -61,7 +61,7 @@ export default class MainWindow extends React.Component {
         else if (this.state.currentScreen == 'addQuestion') {
             return (
                 <div className="well main-window container">
-                    <AddQuestion url="/api/questions/" />
+                    <AddQuestion url="/quiz_builder/api/questions/" />
                     <Menu 
                         takeQuizScreen={this.takeQuizScreen} 
                         viewWelcomeScreen={this.viewWelcomeScreen} 
@@ -73,7 +73,7 @@ export default class MainWindow extends React.Component {
         else if (this.state.currentScreen == 'takeQuiz') {
             return (
                 <div className="well main-window container">
-                    <LoadQuizQuestions url="/api/questions/" />
+                    <LoadQuizQuestions url="/quiz_builder/api/questions/" />
                     <Menu 
                         takeQuizScreen={this.takeQuizScreen} 
                         viewWelcomeScreen={this.viewWelcomeScreen} 

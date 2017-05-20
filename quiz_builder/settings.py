@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'quiz_builder',
-    'quiz_data',
     'rest_framework',
     'webpack_loader',
     'django.contrib.admin',
